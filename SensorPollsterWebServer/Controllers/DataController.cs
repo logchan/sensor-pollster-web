@@ -4,9 +4,11 @@ using System.Net.NetworkInformation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SensorPollsterWebServer.Data;
+using SensorPollsterWebServer.Framework;
 using SensorPollsterWebServer.Model.Api;
 
 namespace SensorPollsterWebServer.Controllers {
+    [RequireUser]
     [Route("api/data")]
     public class DataController : ControllerBase {
         public DataController(ILogger<DataController> logger, SensorDb db) : base(logger, db) {

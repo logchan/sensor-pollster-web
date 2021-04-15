@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Logging;
 using SensorPollsterWebServer.Data;
+using SensorPollsterWebServer.Framework;
 
 namespace SensorPollsterWebServer.Controllers {
+    [RequireUser]
     [Route("api/floor-plan")]
     public sealed class FloorPlanController : ControllerBase {
         public FloorPlanController(ILogger<FloorPlanController> logger, SensorDb db) : base(logger, db) {
