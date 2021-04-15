@@ -15,6 +15,7 @@ using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using SensorPollsterWebServer.Data;
 
@@ -24,6 +25,11 @@ namespace SensorPollsterWebServer {
             // Configure MVC
             services.AddControllers().AddJsonOptions(opt => {
                 opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders =
+                    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
             });
 
             var config = Program.ServerConfig;
@@ -83,9 +89,10 @@ namespace SensorPollsterWebServer {
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseForwardedHeaders();
+
             loggerFactory.AddSerilog();
             appLifetime.ApplicationStopped.Register(Log.CloseAndFlush);
-
 
             var config = Program.ServerConfig;
 

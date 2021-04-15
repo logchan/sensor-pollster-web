@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -16,10 +15,6 @@ namespace SensorPollsterWebServer.Controllers {
 
         [HttpGet("client_challenge")]
         public IActionResult ClientChallenge(string redirect="/") {
-            if (String.Equals(Request.Headers["X-Forwarded-Proto"], "https", StringComparison.OrdinalIgnoreCase)) {
-                Request.Scheme = "https";
-            }
-
             return Challenge(new AuthenticationProperties {
                 RedirectUri = redirect
             });
