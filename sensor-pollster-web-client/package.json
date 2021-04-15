@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@devexpress/dx-react-chart": "^2.7.4",
-    "@devexpress/dx-react-chart-material-ui": "^2.7.4",
-    "@devexpress/dx-react-core": "^2.7.4",
     "@material-ui/core": "^4.10.2",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
@@ -18,10 +15,12 @@
     "@types/react": "^16.9.36",
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",
+    "pondjs": "^0.9.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-timeseries-charts": "^0.16.1",
     "typescript": "^3.7.5"
   },
   "scripts": {

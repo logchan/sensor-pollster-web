@@ -1,12 +1,8 @@
 import React from 'react'
 import { Drawer, makeStyles, List, ListItem, ListItemIcon, ListItemText, Toolbar, Divider } from '@material-ui/core'
 import DashboardIcon from '@material-ui/icons/Dashboard'
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
-import AccountBalanceIcon from '@material-ui/icons/AccountBalance'
-import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet'
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
-import { linkDashboard } from '../utils/Routing'
+import TimelineIcon from '@material-ui/icons/Timeline'
+import { linkDashboard, linkGraphs } from '../utils/Routing'
 import { useHistory } from 'react-router-dom'
 
 class SideDrawerProps {
@@ -51,6 +47,7 @@ export default function SideDrawer(props: SideDrawerProps) {
     <Toolbar />
     <List>
       {makeItem("Dashboard", linkDashboard(), <DashboardIcon />)}
+      {makeItem("Graphs", linkGraphs(), <TimelineIcon />)}
     </List>
   </Drawer>)
 }

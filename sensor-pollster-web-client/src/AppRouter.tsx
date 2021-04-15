@@ -6,6 +6,7 @@ import SideDrawer from './components/SideDrawer'
 import NotFound from './pages/NotFound'
 import { vsmall } from './utils/JsxUtils'
 import TopBar from './components/TopBar'
+import Graphs from './pages/Graphs'
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -39,7 +40,10 @@ export default function AppRouter(props: AppRouterProps) {
           <div style={{ paddingRight: "16px" }}>
             <Switch>
               <Route path="/" exact>
-                <Dashboard></Dashboard>
+                <Dashboard />
+              </Route>
+              <Route path="/graphs" exact>
+                <Graphs />
               </Route>
               <Route path="/">
                 <NotFound />

@@ -40,8 +40,8 @@ export default function Dashboard() {
   })
 
   return <div>
-    <Typography variant="h3">Dashboard</Typography>
-    {vsmall()}
+    <Typography variant="h4">Dashboard</Typography>
+    {vlarge()}
     <Grid container>
       <Grid item sm={12}>
         <TableContainer component={Paper} 
