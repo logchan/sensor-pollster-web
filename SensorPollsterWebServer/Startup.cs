@@ -38,7 +38,9 @@ namespace SensorPollsterWebServer {
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = "OAuth";
             })
-                .AddCookie()
+                .AddCookie(options => {
+                    options.Cookie.SameSite = SameSiteMode.Strict;
+                })
                 .AddOAuth("OAuth", options => {
                     options.ClientId = auth.ClientId;
                     options.ClientSecret = auth.ClientSecret;
