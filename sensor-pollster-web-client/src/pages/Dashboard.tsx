@@ -1,11 +1,15 @@
 import { Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
+import FloorPlanView from '../components/FloorPlanView'
 import Client from '../models/Client'
+import { FloorPlanStatus } from '../models/FloorPlanStatus'
 import Sensor from '../models/Sensor'
-import { vsmall } from '../utils/JsxUtils'
+import { vlarge, vsmall } from '../utils/JsxUtils'
 
 class DashboardState {
+  fetchedData = false
   data: Sensor[] = []
+  floorPlanStatus = FloorPlanStatus.Loading
 }
 
 export default function Dashboard() {
@@ -24,8 +28,12 @@ export default function Dashboard() {
   }
   
   useEffect(() => {
+    if (state.fetchedData) {
+      return
+    }
     (async () => {
       if (await fetchData()) {
+        state.fetchedData = true
         updateState()
       }
     })()
@@ -35,8 +43,9 @@ export default function Dashboard() {
     <Typography variant="h3">Dashboard</Typography>
     {vsmall()}
     <Grid container>
-      <Grid item sm={8}>
-        <TableContainer component={Paper}>
+      <Grid item sm={12}>
+        <TableContainer component={Paper} 
+          style={{maxHeight: state.floorPlanStatus === FloorPlanStatus.Loaded ? "300px" : "none" }}>
           <Table size="small">
             <TableHead>
               <TableRow>
@@ -63,6 +72,15 @@ export default function Dashboard() {
             </TableBody>
           </Table>
         </TableContainer>
+      </Grid>
+    </Grid>
+    { vlarge() }
+    <Grid container>
+      <Grid item sm={12}>
+        <FloorPlanView sensors={state.data} updateStatus={s => {
+          state.floorPlanStatus = s
+          updateState()
+        }} />
       </Grid>
     </Grid>
   </div>

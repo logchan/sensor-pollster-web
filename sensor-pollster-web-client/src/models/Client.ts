@@ -1,3 +1,4 @@
+import { FloorPlanData } from "./FloorPlanData"
 import Sensor from "./Sensor"
 
 export default class Client {
@@ -36,7 +37,12 @@ export default class Client {
       app("limit", limit.toString())
     return await this.createApiRequest<Sensor[]>('GET', url)
   }
+
   async getAllSensorData(limit: number) {
     return await this.getData(null, null, null, limit)
+  }
+
+  async getFloorPlanData() {
+    return await this.createApiRequest<FloorPlanData>('GET', '/api/floor-plan/data')
   }
 }
