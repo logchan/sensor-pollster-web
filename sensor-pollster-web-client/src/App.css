@@ -1,0 +1,11 @@
+.positive {
+  color: green;
+}
+  
+.negative {
+  color: red;
+}
+
+.array-entry:not(:last-child)::after {
+  content: ", ";
+}
