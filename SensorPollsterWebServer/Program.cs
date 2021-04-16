@@ -81,7 +81,7 @@ namespace SensorPollsterWebServer {
         }
 
         private static void InitializeServer() {
-            // TODO: initialize the server here
+
         }
 
         private static string GetVersion() {

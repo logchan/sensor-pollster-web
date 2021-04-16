@@ -1,4 +1,3 @@
-
 namespace SensorPollsterWebServer.Config {
     public class HostingConfig {
         public string Ip { get; set; }
