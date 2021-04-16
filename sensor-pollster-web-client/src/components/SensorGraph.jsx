@@ -46,7 +46,12 @@ export default function SensorGraph(props) {
     width: 2
   }}))
 
-  const all_values = sensors.reduce((arr, s) => arr.concat(s.data.map(d => getter(d))), []).sort((a, b) => a-b)
+  const tv = t => new Date(t).getTime()
+  const startTime = props.start.getTime()
+  const endTime = props.end.getTime()
+  const inRange = data => tv(data.time) >= startTime && tv(data.time) <= endTime
+
+  const all_values = sensors.reduce((arr, s) => arr.concat(s.data.filter(inRange).map(d => getter(d))), []).sort((a, b) => a-b)
   const max = all_values[all_values.length - 1]
   const min = all_values[0]
 
@@ -71,7 +76,7 @@ export default function SensorGraph(props) {
     <Grid container><Grid item sm={12}>
       <ChartContainer timeRange={new TimeSeries({
             columns: ["time"],
-            points: [[props.start.getTime()], [props.end.getTime()]]
+            points: [[startTime], [endTime]]
           }).timerange()}
           onTrackerChanged={tracker => { 
             setTrackerState({tracker})
