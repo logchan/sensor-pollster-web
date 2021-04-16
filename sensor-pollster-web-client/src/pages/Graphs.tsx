@@ -1,4 +1,4 @@
-import { Button, Checkbox, debounce, FormControlLabel, Grid, Typography } from '@material-ui/core'
+import { Button, Checkbox, debounce, FormControlLabel, Grid, TextField, Typography } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import Client from '../models/Client'
 import Sensor from '../models/Sensor'
@@ -118,6 +118,18 @@ export default function Graphs() {
       {makeOffsetBtn("3 days", 24*3)}
       {makeOffsetBtn("7 days", 24*7)}
       {makeOffsetBtn("30 days", 24*30)}
+      <Grid item>
+        <TextField label="Hours" variant="outlined" size="small" onKeyPress={ev => {
+          if (ev.key !== "Enter") {
+            return
+          }
+          const tf = ev.target as HTMLInputElement
+          const hours = Number(tf.value)
+          if (hours > 0) {
+            setRange(hoursOffset(hours))
+          }
+        }} />
+      </Grid>
     </Grid>
     {vlarge()}
     {makeGraph("Temperature", d => d.temperature)}
