@@ -45,7 +45,9 @@ export default function Graphs() {
     }
     (async () => {
       const client = new Client()
-      state.data = await client.getAllSensorData(0)
+      const startDate = new Date()
+      startDate.setTime(startDate.getTime() - (24*60*60*1000) * 8)
+      state.data = await client.getData(null, startDate.toISOString(), null, 0)
       try {
         state.floorPlan = FloorPlanData.postProcess(await client.getFloorPlanData())
       }
@@ -117,7 +119,6 @@ export default function Graphs() {
       {makeOffsetBtn("24 hours", 24)}
       {makeOffsetBtn("3 days", 24*3)}
       {makeOffsetBtn("7 days", 24*7)}
-      {makeOffsetBtn("30 days", 24*30)}
       <Grid item>
         <TextField label="Hours" variant="outlined" size="small" onKeyPress={ev => {
           if (ev.key !== "Enter") {

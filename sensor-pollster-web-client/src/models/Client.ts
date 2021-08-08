@@ -28,11 +28,11 @@ export default class Client {
     })
   }
 
-  async getData(address: String|null, start: String|null, until: String|null, limit: number) {
-    const app = (name: String, val: String|null) => val == null ? "" : `${name}=${val}`
+  async getData(address: String|null, since: String|null, until: String|null, limit: number) {
+    const app = (name: String, val: String|null) => val == null ? "" : `${name}=${val}&`
     const url = '/api/data/get?' + 
       app("address", address) + 
-      app("start", start) + 
+      app("since", since) + 
       app("until", until) + 
       app("limit", limit.toString())
     return await this.createApiRequest<Sensor[]>('GET', url)
